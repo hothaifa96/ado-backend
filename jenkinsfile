@@ -37,7 +37,7 @@ pipeline{
                 ls
                 cd ado-manifests/backend
                 ls
-                sed -i 's/image: ${IMAGE_NAME}:.*/image: ${IMAGE_NAME}:${IMAGE_TAG}/'
+                sed -i 's/image: ${IMAGE_NAME}:.*/image: ${IMAGE_NAME}:${IMAGE_TAG}/' manifest.yml
 
                 git add .
                 git commit -m "updatge image tag ${IMAGE_TAG}"
