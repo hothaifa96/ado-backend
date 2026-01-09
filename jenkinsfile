@@ -8,7 +8,7 @@ pipeline{
         stage("build docker image"){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'hodi-docker', passwordVariable: 'docker-pass', usernameVariable: 'docker-user')]) {
-                    sh """
+                    sh '''
                     docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest .
                     echo ****** login to docker hub ******
                     echo $docker-pass | docker login -u $hodi-docker --password-stdin
@@ -16,7 +16,7 @@ pipeline{
 
                     docker push ${IMAGE_NAME}:${IMAGE_TAG}
                     docker push ${IMAGE_NAME}:latest
-                    """
+                    '''
                 }
             }
         }
