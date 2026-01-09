@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+    environment{
+        IMAGE_NAME="hothaifaz11/ado-backend"
+        IMAGE_TAG= 'V${BUILD_NUMBER}-${GIT_COMMIT.take(5)}'
+    }
+    stages{
+        stage("build docker image"){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'hodi-docker', passwordVariable: 'docker-pass', usernameVariable: 'docker-user')]) {
+                    sh """
+                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest .
+                    echo ****** login to docker hub ******
+                    echo $docker-pass | docker login -u $hodi-docker --password-stdin
+                    echo ****** push to docker hub ******
+
+                    docker push ${IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+        
+    }
+}
