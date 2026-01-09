@@ -30,6 +30,7 @@ pipeline{
         }
         stage("clone gitops repo"){
             steps{
+                sh 'rm -fr devops'
                 sh 'git clone https://github.com/hothaifa96/devops'
                 
                 sh'''
@@ -50,7 +51,7 @@ pipeline{
                 git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com main
             '''
         }
-                sh 'rm -fr devops'
+                
             }
         }
     }
