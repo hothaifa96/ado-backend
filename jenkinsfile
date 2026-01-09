@@ -18,7 +18,7 @@ pipeline{
                     docker build -t ${IMAGE_NAME}:$IMAGE_TAG -t ${IMAGE_NAME}:latest .
                     echo ****** login to docker hub ******
                     
-                    echo $docker_pass | docker login -u "${DOCKER_USER}" --password-stdin
+                    echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
 
                     echo ****** push to docker hub ******
 
