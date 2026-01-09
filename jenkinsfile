@@ -53,7 +53,7 @@ pipeline{
                                           usernameVariable: 'GIT_USERNAME')]) {
             sh '''
             cd devops
-                git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com main
+                git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/hothaifa/devops main
             '''
         }
                 
