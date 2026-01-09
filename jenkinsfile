@@ -2,7 +2,8 @@ pipeline{
     agent any
     environment{
         IMAGE_NAME="hothaifaz11/ado-backend"
-    }
+        IMAGE_TAG=""
+    }   
     stages{
         stage("build docker image"){
             
@@ -28,7 +29,31 @@ pipeline{
                 }
             }
         }
-        
+        stage("clone gitops repo"){
+            steps{
+                sh 'git clone https://github.com/hothaifa96/devops'
+                
+                sh'''
+                cd devops
+                ls
+                cd ado-manifests/backend
+                ls
+                sed -i 's/image: ${IMAGE_NAME}:.*/image: ${IMAGE_NAME}:${IMAGE_TAG}/'
+
+                git add .
+                git commit -m "updatge image tag ${IMAGE_TAG}"
+                '''
+                 withCredentials([usernamePassword(credentialsId: 'hodi-git', 
+                                          passwordVariable: 'GIT_PASSWORD', 
+                                          usernameVariable: 'GIT_USERNAME')]) {
+            sh '''
+            cd devops
+                git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com main
+            '''
+        }
+                sh 'rm -fr devops'
+            }
+        }
     }
 }
 
