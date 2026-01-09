@@ -40,7 +40,7 @@ pipeline{
                 ls
                 cat manifest.yml
                 echo -----------
-                sed -i 's|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' manifest.yml
+                sudo sed -i 's|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' manifest.yml
                 echo "sed -i 's|image: ${IMAGE_NAME}:.*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' manifest.yml"
 
                 cat manifest.yml
