@@ -11,7 +11,7 @@ pipeline{
                 env.IMAGE_TAG = "v${BUILD_NUMBER}-${GIT_COMMIT.take(5)}"
             }
                 withCredentials([usernamePassword(
-            credentialsId: 'dockerhub-creds',
+            credentialsId: 'hodi-docker',
             usernameVariable: 'DOCKER_USER',
             passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
