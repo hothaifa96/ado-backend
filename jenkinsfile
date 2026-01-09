@@ -2,7 +2,6 @@ pipeline{
     agent any
     environment{
         IMAGE_NAME="hothaifaz11/ado-backend"
-        IMAGE_TAG=""
     }   
     stages{
         stage("build docker image"){
